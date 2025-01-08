@@ -18,6 +18,25 @@ interface DeepLTranslateRes {
   translations: DeepLTranslate[]
 }
 
+type GlossaryIdentifyingPartial = {
+  glossary_id: string
+}
+
+type DeeplGlossaryInfo = {
+  glossary_id: string,
+  name: string
+  ready: boolean,
+  source_lang: string,
+  target_lang: string,
+  creation_time: string, // iso string
+  entry_count: number
+}
+
+type GlossaryInfoCache = {
+  lastUpdate?: number,
+  glossaries?: Array<DeeplGlossaryInfo>
+}
+
 const deepl = axios.create({})
 
 deepl.interceptors.request.use((req) => {
@@ -74,22 +93,6 @@ function stripeLocaleCode(locale?: string): string | undefined {
 class DeepL extends TranslateEngine {
   async translate(options: TranslateOptions) {
 
-    const glossaryData: Record<string, string> = {}
-
-    try {
-      const glossaries = new DeeplGlossaries()
-
-      if (glossaries.isEnabled() && options.from && options.to) {
-        const glossaryId = await glossaries.getGlossaryId(options.to, options.from)
-
-        if (glossaryId) {
-          glossaryData.glossary_id = glossaryId
-        }
-      }
-    } catch (error) {
-      log(false, `Error reading glossary id for translation from ${options.from} => ${options.to}`, error)
-    }
-
     try {
       const res: DeepLTranslateRes = await deepl({
         method: 'POST',
@@ -98,7 +101,7 @@ class DeepL extends TranslateEngine {
           text: options.text,
           source_lang: stripeLocaleCode(options.from || undefined),
           target_lang: stripeLocaleCode(options.to),
-          ...glossaryData
+          ...await DeeplGlossaries.getTranslationRequestGlossaryIdentifier(options)
         },
       }).then(({ data }) => data)
 
@@ -137,21 +140,6 @@ class DeepL extends TranslateEngine {
   }
 }
 
-type DeeplGlossaryInfo = {
-  glossary_id: string,
-  name: string
-  ready: boolean,
-  source_lang: string,
-  target_lang: string,
-  creation_time: string, // iso string
-  entry_count: number
-}
-
-type GlossaryInfoCache = {
-  lastUpdate?: number,
-  glossaries?: Array<DeeplGlossaryInfo>
-}
-
 const GLOSSARY_CACHE_TTL = 60 * 1000 // 1 minute
 
 class DeeplGlossaries {
@@ -169,8 +157,8 @@ class DeeplGlossaries {
       const glossaries = await this.getGlossaryIds(targetLanguage, sourceLanguage)
 
       glossaries.forEach(async id => {
-          await this.deleteGlossary(id)
-        })
+        await this.deleteGlossary(id)
+      })
 
       await this.createGlossary(targetLanguage, sourceLanguage, content)
     } finally {
@@ -280,6 +268,26 @@ class DeeplGlossaries {
   private invalidateCache() {
     DeeplGlossaries.cache.lastUpdate = 0
     DeeplGlossaries.cache.glossaries = []
+  }
+
+  public static async getTranslationRequestGlossaryIdentifier(options: TranslateOptions): Promise<GlossaryIdentifyingPartial|{}> {
+    try {
+      const glossaries = new DeeplGlossaries()
+
+      if (glossaries.isEnabled() && options.from && options.to) {
+        const glossaryId = await glossaries.getGlossaryId(options.to, options.from)
+
+        if (glossaryId) {
+          return {
+            glossary_id: glossaryId
+          };
+        }
+      }
+    } catch (error) {
+      log(false, `Error reading glossary id for translation from ${options.from} => ${options.to}`, error)
+    }
+
+    return {};
   }
 }
 
