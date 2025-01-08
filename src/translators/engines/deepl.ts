@@ -142,8 +142,25 @@ class DeepL extends TranslateEngine {
 
 const GLOSSARY_CACHE_TTL = 60 * 1000 // 1 minute
 
+/**
+ * Encapsulate glossary handling.
+ *
+ * Glossaries are enabled when the `Config.deeplGlossariesDir` setting is set.
+ * Files in that directory (only direct children) that follow the naming scheme "{sourceLanguage}-{targetLanguage}.csv"
+ *  are considered sources for the glossaries that are kept on the DeepL-servers.
+ *
+ * To transmit (create/update is the same here) these files, the user must execute one of
+ *  - `Commands.deepl_update_glossaries`
+ *  - `Commands.deepl_update_glossary`.
+ *
+ * After the glossaries have been created, they are automatically applied when translating a matching language-pair with deepl.
+ */
 class DeeplGlossaries {
 
+  /**
+   * Keeps available glossaries as a list of source-/target language pairs.
+   * Saves on a lot of requests, especially when performing bulk translation.
+   */
   static readonly cache: GlossaryInfoCache = {}
 
   public isEnabled(): boolean {
@@ -152,6 +169,16 @@ class DeeplGlossaries {
     return !! dir
   }
 
+  /**
+   * Update a single glossary.
+   *
+   * 1. Deletes all existing glossaries for the given source-/target language pair
+   * 2. Creates a new glossary
+   *
+   * @param targetLanguage
+   * @param sourceLanguage
+   * @param content CSV-formatted glossary
+   */
   public async updateGlossary(targetLanguage: string, sourceLanguage: string, content: string) {
     try {
       const glossaries = await this.getGlossaryIds(targetLanguage, sourceLanguage)
@@ -166,6 +193,14 @@ class DeeplGlossaries {
     }
   }
 
+  /**
+   * Retrieves an id of one glossary on DeepL-servers for the source-/target language pair.
+   * If there are muliple glossaries, any is picked.
+   *
+   * @param targetLanguage
+   * @param sourceLanguage
+   * @returns
+   */
   public async getGlossaryId(targetLanguage: string, sourceLanguage: string): Promise<string|undefined> {
     const glossaries = await this.getGlossaryIds(targetLanguage, sourceLanguage)
 
@@ -174,6 +209,12 @@ class DeeplGlossaries {
     }
   }
 
+  /**
+   * Retrieves meta-information about all glossaries on DeepL-servers.
+   * This is the point that implements the caching of glossary information.
+   *
+   * @returns
+   */
   public async readGlossaryList(): Promise<Array<DeeplGlossaryInfo>> {
     if (this.isCached()) {
       return DeeplGlossaries.cache.glossaries!
@@ -199,6 +240,13 @@ class DeeplGlossaries {
     }
   }
 
+  /**
+   * Retrieves a list of ids of all glossaries on DeepL-servers for the source-/target language pair.
+   *
+   * @param targetLanguage
+   * @param sourceLanguage
+   * @returns
+   */
   private async getGlossaryIds(targetLanguage: string, sourceLanguage: string): Promise<Array<string>> {
     const glossaries = await this.readGlossaryList()
 
@@ -208,6 +256,10 @@ class DeeplGlossaries {
         .map(glossary => glossary.glossary_id)
   }
 
+  /**
+   * Deletes a glossary.
+   * @param id
+   */
   private async deleteGlossary(id: string) {
     try {
       const { status, data } = await deepl({
@@ -228,6 +280,13 @@ class DeeplGlossaries {
     }
   }
 
+  /**
+   * Creates a glossary on DeepL-servers.
+   *
+   * @param targetLanguage
+   * @param sourceLanguage
+   * @param content csv-formatted glossary
+   */
   private async createGlossary(targetLanguage: string, sourceLanguage: string, content: string) {
     if (! content || content.length === 0) {
       throw new Error(`Didn't create glossary ${sourceLanguage} => ${targetLanguage}: with empty content.`)
@@ -270,6 +329,20 @@ class DeeplGlossaries {
     DeeplGlossaries.cache.glossaries = []
   }
 
+  //
+  // static
+  //
+
+  /**
+   * Creates an object that - when spread into the translation request parameters - identifies a glossary.
+   *
+   * This can always safely be spreaded into the request params. An empty object is returned when
+   *  - glossaries are disabled
+   *  - no glossary is available for the language pair from the request
+   *
+   * @param options defines source-/target language pair
+   * @returns glossary identification parameters
+   */
   public static async getTranslationRequestGlossaryIdentifier(options: TranslateOptions): Promise<GlossaryIdentifyingPartial|{}> {
     try {
       const glossaries = new DeeplGlossaries()
