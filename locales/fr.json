@@ -14,6 +14,7 @@
   "command.go_to_next_usage": "Passer à l'utilisation suivante",
   "command.go_to_prev_usage": "Passer à l'utilisation précédente",
   "command.go_to_range": "Aller à la plage",
+  "command.i18n-ally.deeply-list-glossaries": "",
   "command.i18n-ally.deeply-update-glossaries": "",
   "command.i18n-ally.deeply-update-glossary": "",
   "command.insert_key": "Insérer une clé",

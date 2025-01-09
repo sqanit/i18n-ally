@@ -14,6 +14,7 @@
   "command.go_to_next_usage": "Go to next usage",
   "command.go_to_prev_usage": "Go to previous usage",
   "command.go_to_range": "Go to range",
+  "command.i18n-ally.deeply-list-glossaries": "List available glossaries",
   "command.i18n-ally.deeply-update-glossaries": "Update DeepL Glossaries",
   "command.i18n-ally.deeply-update-glossary": "Update DeepL Glossary",
   "command.insert_key": "Insert key",

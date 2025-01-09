@@ -92,6 +92,28 @@ class DeeplGlossaryCommands {
     }
   }
 
+  public static async listGlossaries() {
+    try {
+      this.checkEnabled();
+
+      const outputChannel = window.createOutputChannel('glossaries');
+
+      outputChannel.show();
+      outputChannel.appendLine('Reading glossary list...');
+
+      const glossaries = await this.glossaries.readGlossaryList(true);
+
+      outputChannel.appendLine(JSON.stringify(glossaries, null, '\t'));
+    } catch (error) {
+      if (error instanceof Error) {
+        window.showErrorMessage(error.message)
+      } else {
+        window.showErrorMessage(`Unkown error: "${error}"`)
+      }
+    }
+
+  }
+
   private static async updateGlossaryFromFile(file: GlossaryFile) {
     const glossaryContent = readFileSync(file.path, 'utf-8')
 
@@ -142,5 +164,6 @@ export default <ExtensionModule> function() {
     commands.registerCommand(Commands.deepl_usage, deepAuth),
     commands.registerCommand(Commands.deepl_update_glossaries, DeeplGlossaryCommands.updateGlossaries.bind(DeeplGlossaryCommands)),
     commands.registerCommand(Commands.deepl_update_glossary, DeeplGlossaryCommands.updateGlossary.bind(DeeplGlossaryCommands)),
+    commands.registerCommand(Commands.deepl_list_glossaries, DeeplGlossaryCommands.listGlossaries.bind(DeeplGlossaryCommands)),
   ]
 }

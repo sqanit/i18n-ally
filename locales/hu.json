@@ -14,6 +14,7 @@
   "command.go_to_next_usage": "További használatokhoz ugrás",
   "command.go_to_prev_usage": "Előző használatokhoz ugrás",
   "command.go_to_range": "Ugrás tartományhoz",
+  "command.i18n-ally.deeply-list-glossaries": "",
   "command.i18n-ally.deeply-update-glossaries": "",
   "command.i18n-ally.deeply-update-glossary": "",
   "command.insert_key": "Kulcs beszúrása",

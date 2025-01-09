@@ -14,6 +14,7 @@
   "command.go_to_next_usage": "Ir para o próximo uso",
   "command.go_to_prev_usage": "Ir para o uso anterior",
   "command.go_to_range": "Ir para o intervalo",
+  "command.i18n-ally.deeply-list-glossaries": "",
   "command.i18n-ally.deeply-update-glossaries": "",
   "command.i18n-ally.deeply-update-glossary": "",
   "command.insert_key": "Inserir chave",

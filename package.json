@@ -378,6 +378,11 @@
         "title": "%command.i18n-ally.deeply-update-glossary%"
       },
       {
+        "command": "i18n-ally.deepl-list-glossaries",
+        "category": "%extname%",
+        "title": "%command.i18n-ally.deeply-list-glossaries%"
+      },
+      {
         "command": "i18n-ally.go-to-range",
         "category": "%extname%",
         "title": "%command.go_to_range%"

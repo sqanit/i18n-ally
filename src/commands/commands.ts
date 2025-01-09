@@ -48,4 +48,5 @@ export const enum Commands {
   deepl_usage = 'i18n-ally.deepl-usage',
   deepl_update_glossaries = 'i18n-ally.deepl-update-glossaries',
   deepl_update_glossary = 'i18n-ally.deepl-update-glossary',
+  deepl_list_glossaries = 'i18n-ally.deepl-list-glossaries',
 }

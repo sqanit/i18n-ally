@@ -215,8 +215,8 @@ class DeeplGlossaries {
    *
    * @returns
    */
-  public async readGlossaryList(): Promise<Array<DeeplGlossaryInfo>> {
-    if (this.isCached()) {
+  public async readGlossaryList(forceUpdate: boolean = false): Promise<Array<DeeplGlossaryInfo>> {
+    if (this.isCached() && ! forceUpdate) {
       return DeeplGlossaries.cache.glossaries!
     }
 

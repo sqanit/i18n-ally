@@ -14,6 +14,7 @@
   "command.go_to_next_usage": "ไปยังการใช้งานถัดไป",
   "command.go_to_prev_usage": "ไปยังการใช้งานก่อนหน้านี้",
   "command.go_to_range": "ไปยังช่วง",
+  "command.i18n-ally.deeply-list-glossaries": "",
   "command.i18n-ally.deeply-update-glossaries": "",
   "command.i18n-ally.deeply-update-glossary": "",
   "command.insert_key": "แทรกคีย์",

@@ -14,6 +14,7 @@
   "command.go_to_next_usage": "다음 사용량으로 이동",
   "command.go_to_prev_usage": "이전 사용량으로 이동",
   "command.go_to_range": "범위 이동",
+  "command.i18n-ally.deeply-list-glossaries": "",
   "command.i18n-ally.deeply-update-glossaries": "",
   "command.i18n-ally.deeply-update-glossary": "",
   "command.insert_key": "키 삽입",
