@@ -368,12 +368,12 @@
         "title": "%command.deepl_usage%"
       },
       {
-        "command": "i18n-ally.deeply-update-glossaries",
+        "command": "i18n-ally.deepl-update-glossaries",
         "category": "%extname%",
         "title": "%command.i18n-ally.deeply-update-glossaries%"
       },
       {
-        "command": "i18n-ally.deeply-update-glossary",
+        "command": "i18n-ally.deepl-update-glossary",
         "category": "%extname%",
         "title": "%command.i18n-ally.deeply-update-glossary%"
       },
