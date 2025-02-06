@@ -114,6 +114,7 @@
   "editor.title": "i18n Ally Editor",
   "editor.translate": "Übersetzen",
   "editor.translate_all_missing": "Alle fehlenden übersetzen",
+  "editor.translate_update": "Aktualisieren Sie alle Übersetzungen",
   "errors.keystyle_not_set": "Keystyle ist nicht angegeben, Vorgang abgebrochen.",
   "errors.translating_empty_source_value": "Quellübersetzung von \"{0}\" wird nicht gefunden. Übersetzung abgebrochen.",
   "errors.translating_same_locale": "Übersetzen in dasselbe Sprache ist nicht erlaubt.",

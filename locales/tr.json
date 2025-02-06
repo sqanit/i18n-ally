@@ -114,6 +114,7 @@
   "editor.title": "i18n Ally Editörü",
   "editor.translate": "Çevir",
   "editor.translate_all_missing": "Eksik olan Hepsini Çevir",
+  "editor.translate_update": "Tüm çevirileri güncelle",
   "errors.keystyle_not_set": "Keystyle is not specified, operation cancelled.",
   "errors.translating_empty_source_value": "\"{0}\" için kaynak çeviri bulunamadı. Çeviri iptal edildi.",
   "errors.translating_same_locale": "Aynı dile çevirmeye izin verilmiyor.",

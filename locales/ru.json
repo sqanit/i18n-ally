@@ -114,6 +114,7 @@
   "editor.title": "i18n Ally редактор",
   "editor.translate": "Перевести",
   "editor.translate_all_missing": "Перевести все пропущенные",
+  "editor.translate_update": "Обновите все переводы",
   "errors.keystyle_not_set": "Стиль ключа не указан, операция прервана.",
   "errors.translating_empty_source_value": "Исходный перевод \"{0}\" не найден. Перевод прерван.",
   "errors.translating_same_locale": "Перевод на тот же язык не допускается.",

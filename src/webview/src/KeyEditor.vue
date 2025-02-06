@@ -47,6 +47,9 @@
           v-earth
           span {{ $t('editor.translate_all_missing') }} ({{emptyRecords.length}})
         // .button Mark all as...
+        .button(@click='updateTranslations')
+          v-earth
+          span {{ $t('editor.translate_update') }}
 
     .records
       record-editor(
@@ -162,6 +165,14 @@ export default Vue.extend({
           keypath: this.data.keypath,
           locales: this.emptyRecords.map(i => i.locale),
         },
+      })
+    },
+    updateTranslations() {
+      vscode.postMessage({
+        type: 'translate',
+        data: {
+          keypath: this.data.keypath
+        }
       })
     },
     gotoKey(v) {

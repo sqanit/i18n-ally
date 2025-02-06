@@ -114,6 +114,7 @@
   "editor.title": "i18n Ally szerkesztő",
   "editor.translate": "Fordítás",
   "editor.translate_all_missing": "Az összes hiányzó fordítás lefordítása",
+  "editor.translate_update": "Frissítse az összes fordítást",
   "errors.keystyle_not_set": "A kulcsstílus nincs megadva, a művelet megszakítva.",
   "errors.translating_empty_source_value": "\"{0}\" forrásfordítása nem található. A fordítás megszakítva.",
   "errors.translating_same_locale": "Nem lehet ugyanabba a nyelvi környezetbe fordítani.",

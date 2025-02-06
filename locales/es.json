@@ -114,6 +114,7 @@
   "editor.title": "Editor de i18n Ally",
   "editor.translate": "Traducir",
   "editor.translate_all_missing": "Traducir todos los vacíos",
+  "editor.translate_update": "Actualizar todas las traducciones",
   "errors.keystyle_not_set": "Si no se especifica el estilo de la llave, se cancela la operación.",
   "errors.translating_empty_source_value": "Si no se encuentra la traducción original de \"{0}\". Traducción abortada.",
   "errors.translating_same_locale": "No se permite la traducción al mismo archivo de configuración.",

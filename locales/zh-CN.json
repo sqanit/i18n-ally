@@ -114,6 +114,7 @@
   "editor.title": "i18n Ally 编辑器",
   "editor.translate": "翻译",
   "editor.translate_all_missing": "翻译所有缺失的文案",
+  "editor.translate_update": "更新所有翻译",
   "errors.keystyle_not_set": "未指定路径样式，操作已取消。",
   "errors.translating_empty_source_value": "找不到 \"{0}\" 的原始文案。\n翻译已中止。",
   "errors.translating_same_locale": "无法翻译到相同的语言",

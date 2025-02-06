@@ -114,6 +114,7 @@
   "editor.title": "ตัวแก้ไข i18n Ally",
   "editor.translate": "แปล",
   "editor.translate_all_missing": "การแปลทั้งหมดที่ขาดหายไป",
+  "editor.translate_update": "อัปเดตการแปลทั้งหมด",
   "errors.keystyle_not_set": "ไม่ได้ระบุรูปแบบคีย์ การดำเนินการถูกยกเลิก",
   "errors.translating_empty_source_value": "ไม่พบการแปลต้นฉบับของ \"{0}\" การแปลถูกยกเลิกแล้ว",
   "errors.translating_same_locale": "ไม่อนุญาตให้แปลเป็นภาษาเดียวกัน",

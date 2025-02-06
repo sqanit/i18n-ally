@@ -114,6 +114,7 @@
   "editor.title": "i18n Ally 편집기",
   "editor.translate": "번역",
   "editor.translate_all_missing": "모든 누락 메시지 번역",
+  "editor.translate_update": "모든 번역을 업데이트하십시오",
   "errors.keystyle_not_set": "키 스타일이 지정되지 않아 작업이 취소되었습니다.",
   "errors.translating_empty_source_value": "\"{0}\"의 원본 번역을 찾을 수 없습니다. \n번역이 중단되었습니다.",
   "errors.translating_same_locale": "동일한 언어로 번역할 수 없습니다.",

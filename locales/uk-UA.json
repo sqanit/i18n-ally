@@ -114,6 +114,7 @@
   "editor.title": "i18n Ally редактор",
   "editor.translate": "Перкласти",
   "editor.translate_all_missing": "Перкласти всі пропущені",
+  "editor.translate_update": "Оновіть усі переклади",
   "errors.keystyle_not_set": "Шаблон ключа невідомий, операція перервана.",
   "errors.translating_empty_source_value": "Оригінальний переклад \"{0}\" не найден. Переклад перерваний.",
   "errors.translating_same_locale": "Перевести на ту саму мову не можна.",

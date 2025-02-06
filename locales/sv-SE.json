@@ -114,6 +114,7 @@
   "editor.title": "i18n Ally Editor",
   "editor.translate": "Översätt",
   "editor.translate_all_missing": "Översätt Alla Saknade",
+  "editor.translate_update": "Uppdatera alla översättningar",
   "errors.keystyle_not_set": "Nyckelstilmall inte angiven, operation avbruten.",
   "errors.translating_empty_source_value": "Källöversättning av \"{0}\" hittas ej. Översättning avbruten.",
   "errors.translating_same_locale": "Översättning till samma locale-fil är inte tillåtet.",
