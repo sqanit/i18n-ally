@@ -3,6 +3,7 @@ import { Commands } from '~/commands'
 import i18n from '~/i18n'
 import { CurrentFile, Global, LocaleRecord, Config, ActionSource } from '~/core'
 import { decorateLocale, escapeMarkdown, NodeHelper } from '~/utils'
+import { LocaleTree } from '~/core'
 
 const EmptyButton = '⠀⠀'
 
@@ -76,10 +77,14 @@ export function createTable(visibleLocales: string[], records: Record<string, Lo
         value: formatValue(CurrentFile.loader.getValueByKey(record.keypath, locale, maxLength) || '-'),
         commands: '',
       }
-      const commands = getAvaliableCommands(record, keyIndex)
-      row.commands = commands
-        .map(c => typeof c === 'string' ? c : `[${c.icon}](${c.command} "${c.text}")`)
-        .join(' ')
+
+      if (record instanceof LocaleRecord) {
+        const commands = getAvaliableCommands(record, keyIndex)
+        row.commands = commands
+          .map(c => typeof c === 'string' ? c : `[${c.icon}](${c.command} "${c.text}")`)
+          .join(' ')
+      }
+
       return [row]
     })
     .map(item => `| | **${item.locale}** | | ${item.value} | ${item.commands} |`)
@@ -93,9 +98,16 @@ export function createTable(visibleLocales: string[], records: Record<string, Lo
 
 export function createHover(keypath: string, maxLength = 0, mainLocale?: string, keyIndex?: number) {
   const loader = CurrentFile.loader
-  const records = loader.getTranslationsByKey(keypath, undefined)
-  if (!Object.keys(records).length)
-    return undefined
+  let records: Record<string, LocaleRecord> = loader.getTranslationsByKey(keypath, undefined)
+
+  if (!Object.keys(records).length) {
+    const tree = loader.getTreeNodeByKey(keypath, undefined)
+
+    if (! tree || tree.type !== 'tree')
+      return
+
+    records = createHoverRecordsForTreeNode(tree)
+  }
 
   mainLocale = mainLocale || Config.displayLanguage
 
@@ -123,3 +135,19 @@ function a() {
 }
 
 a()
+
+function createHoverRecordsForTreeNode(tree: LocaleTree): Record<string, LocaleRecord> {
+  if (!tree) return {}
+
+ const realRecords: Record<string, LocaleRecord> = {}
+
+  for (const locale in tree.values) {
+    realRecords[locale] = new LocaleRecord({
+      keypath: tree.keypath,
+      locale,
+      value: '',
+    })
+  }
+
+  return realRecords
+}
